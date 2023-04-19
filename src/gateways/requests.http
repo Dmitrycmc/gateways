@@ -1,0 +1,20 @@
+### Create
+POST localhost:3000/gateways
+Content-Type: application/json
+
+{ "name": "Gateway 9" }
+
+### Read all
+GET localhost:3000/gateways
+
+### Read
+GET localhost:3000/gateways/nBEf
+
+### Update
+PUT localhost:3000/gateways/nBEf2
+Content-Type: application/json
+
+{ "name": "Gateway 11" }
+
+### Delete
+DELETE localhost:3000/gateways/nBEf
