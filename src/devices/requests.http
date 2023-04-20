@@ -1,0 +1,20 @@
+### Create
+POST localhost:3000/devices
+Content-Type: application/json
+
+{ "name": "Device 5" }
+
+### Read all
+GET localhost:3000/devices
+
+### Read
+GET localhost:3000/devices/nBEf
+
+### Update
+PUT localhost:3000/devices/nBEf2
+Content-Type: application/json
+
+{ "name": "Device 11" }
+
+### Delete
+DELETE localhost:3000/devices/nBEf
