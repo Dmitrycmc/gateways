@@ -8,7 +8,6 @@ module.exports = {
     '../.eslintrc.js',
   ],
   env: {
-    node: true,
-    jest: true,
+    browser: true
   }
 };
