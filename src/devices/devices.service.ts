@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Device, DeviceWithId } from './types';
 import { nanoid } from 'nanoid';
 import { NotFoundError } from '../errors/NotFoundError';
+import { Device, DeviceWithId } from '../types/devices';
 
 @Injectable()
 export class DevicesService {

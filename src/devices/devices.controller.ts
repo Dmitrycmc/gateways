@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { DevicesService } from './devices.service';
-import { Device, DeviceWithId } from './types';
+import { Device, DeviceWithId } from '../types/devices';
 
 @Controller('devices')
 export class DevicesController {

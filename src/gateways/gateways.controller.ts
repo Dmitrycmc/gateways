@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { GatewaysService } from './gateways.service';
-import { Gateway, GatewayWithId } from './types';
+import { Gateway, GatewayWithId } from '../types/gateways';
 
 @Controller('gateways')
 export class GatewaysController {

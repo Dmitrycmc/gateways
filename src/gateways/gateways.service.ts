@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Gateway, GatewayWithId } from './types';
 import { nanoid } from 'nanoid';
 import { NotFoundError } from '../errors/NotFoundError';
+import { Gateway, GatewayWithId } from '../types/gateways';
 
 @Injectable()
 export class GatewaysService {
