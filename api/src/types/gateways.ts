@@ -1,3 +1,5 @@
+import { Id } from './common';
+
 export type Gateway = {
   name: string;
 };
