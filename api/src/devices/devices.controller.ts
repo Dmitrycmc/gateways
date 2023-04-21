@@ -10,7 +10,7 @@ import {
 import { DevicesService } from './devices.service';
 import { Device, DeviceWithId } from '../types/devices';
 
-@Controller('devices')
+@Controller('api/devices')
 export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {}
 

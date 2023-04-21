@@ -10,7 +10,7 @@ import {
 import { GatewaysService } from './gateways.service';
 import { Gateway, GatewayWithId } from '../types/gateways';
 
-@Controller('gateways')
+@Controller('api/gateways')
 export class GatewaysController {
   constructor(private readonly gatewaysService: GatewaysService) {}
 
