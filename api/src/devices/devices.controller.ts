@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { DevicesService } from './devices.service';
 import { Device, DeviceWithId } from '../types/devices';
+import { Id } from '../types/common';
 
 @Controller('api/devices')
 export class DevicesController {
@@ -25,17 +26,17 @@ export class DevicesController {
   }
 
   @Get('/:id')
-  read(@Param('id') id: string): DeviceWithId {
+  read(@Param('id') id: Id): DeviceWithId {
     return this.devicesService.read(id);
   }
 
   @Put('/:id')
-  update(@Param('id') id: string, @Body() data: Device): DeviceWithId {
+  update(@Param('id') id: Id, @Body() data: Device): DeviceWithId {
     return this.devicesService.update(id, data);
   }
 
   @Delete('/:id')
-  delete(@Param('id') id: string): DeviceWithId {
+  delete(@Param('id') id: Id): DeviceWithId {
     return this.devicesService.delete(id);
   }
 }

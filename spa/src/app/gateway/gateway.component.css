@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  background: #9ACD3244;
+  border: solid 1px #9ACD32;
+  border-radius: 8px;
+
+  margin-bottom: 8px;
+}
+
+.devices {
+  display: flex;
+}
+
+.name {
+  margin: 15px;
+}
+
+.name-button {
+  margin: 15px;
+  cursor: pointer;
+}

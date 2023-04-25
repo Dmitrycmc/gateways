@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { nanoid } from 'nanoid';
 import { NotFoundError } from '../errors/NotFoundError';
 import { Device, DeviceWithId } from '../types/devices';
+import { Id } from '../types/common';
 
 @Injectable()
 export class DevicesService {
@@ -20,7 +21,7 @@ export class DevicesService {
     return this.devices;
   }
 
-  read(id: string): DeviceWithId {
+  read(id: Id): DeviceWithId {
     const entity = this.devices.find((g) => g.id === id);
     if (!entity) {
       throw new NotFoundError();
@@ -28,7 +29,7 @@ export class DevicesService {
     return entity;
   }
 
-  update(id: string, data: Device): DeviceWithId | null {
+  update(id: Id, data: Device): DeviceWithId | null {
     const entity = this.devices.find((g) => g.id === id);
     if (!entity) {
       throw new NotFoundError();
@@ -37,12 +38,20 @@ export class DevicesService {
     return entity;
   }
 
-  delete(id: string): DeviceWithId | null {
+  delete(id: Id): DeviceWithId | null {
     const entity = this.devices.find((g) => g.id === id);
     if (!entity) {
       throw new NotFoundError();
     }
     this.devices = this.devices.filter((e) => e !== entity);
     return entity;
+  }
+
+  public unbindGateway(id: Id) {
+    this.devices.forEach((device) => {
+      if (device.gatewayId === id) {
+        device.gatewayId = null;
+      }
+    });
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { nanoid } from 'nanoid';
 import { NotFoundError } from '../errors/NotFoundError';
 import { Gateway, GatewayWithId } from '../types/gateways';
+import { Id } from '../types/common';
 
 @Injectable()
 export class GatewaysService {
@@ -20,7 +21,7 @@ export class GatewaysService {
     return this.gateways;
   }
 
-  read(id: string): GatewayWithId {
+  read(id: Id): GatewayWithId {
     const entity = this.gateways.find((g) => g.id === id);
     if (!entity) {
       throw new NotFoundError();
@@ -28,7 +29,7 @@ export class GatewaysService {
     return entity;
   }
 
-  update(id: string, data: Gateway): GatewayWithId | null {
+  update(id: Id, data: Gateway): GatewayWithId | null {
     const entity = this.gateways.find((g) => g.id === id);
     if (!entity) {
       throw new NotFoundError();
@@ -37,7 +38,7 @@ export class GatewaysService {
     return entity;
   }
 
-  delete(id: string): GatewayWithId | null {
+  delete(id: Id): GatewayWithId | null {
     const entity = this.gateways.find((g) => g.id === id);
     if (!entity) {
       throw new NotFoundError();
