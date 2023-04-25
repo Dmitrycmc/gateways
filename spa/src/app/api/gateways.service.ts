@@ -17,11 +17,11 @@ export class GatewaysService {
     return this.http.get<GatewayWithId[]>('api/gateways');
   }
 
-  updateGateway(id: Id, data: Gateway) {
-    return this.http.put<GatewayWithId>(`api/gateways/${id}`, data);
+  updateGateway(_id: Id, data: Gateway) {
+    return this.http.put<GatewayWithId>(`api/gateways/${_id}`, data);
   }
 
-  deleteGateway(id: Id) {
-    return this.http.delete<GatewayWithId>(`api/gateways/${id}`);
+  deleteGateway(_id: Id) {
+    return this.http.delete<GatewayWithId>(`api/gateways/${_id}`);
   }
 }

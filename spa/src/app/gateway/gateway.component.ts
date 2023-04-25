@@ -20,7 +20,7 @@ export class GatewayComponent {
   openDialog() {
     this.dialog.open(GatewayDialogComponent, {
       data: {
-        id: this.gateway?.id,
+        _id: this.gateway?._id,
         name: this.gateway?.name,
         update: this.update,
       },

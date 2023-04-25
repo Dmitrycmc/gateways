@@ -6,5 +6,5 @@ export type Device = {
 };
 
 export type DeviceWithId = Device & {
-  id: Id;
+  _id: Id;
 };

@@ -8,13 +8,13 @@ Content-Type: application/json
 GET localhost:3000/api/devices
 
 ### Read
-GET localhost:3000/api/devices/nBEf
+GET localhost:3000/api/devices/6447f42986d0a798429a2564
 
 ### Update
-PUT localhost:3000/api/devices/nBEf2
+PUT localhost:3000/api/devices/6447f42986d0a798429a2564
 Content-Type: application/json
 
 { "name": "Device 11" }
 
 ### Delete
-DELETE localhost:3000/api/devices/nBEf
+DELETE localhost:3000/api/devices/6447f42986d0a798429a2564

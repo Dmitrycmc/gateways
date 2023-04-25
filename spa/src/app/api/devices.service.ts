@@ -17,11 +17,11 @@ export class DevicesService {
     return this.http.get<DeviceWithId[]>('api/devices');
   }
 
-  updateDevice(id: Id, data: Device) {
-    return this.http.put<DeviceWithId>(`api/devices/${id}`, data);
+  updateDevice(_id: Id, data: Device) {
+    return this.http.put<DeviceWithId>(`api/devices/${_id}`, data);
   }
 
-  deleteDevice(id: Id) {
-    return this.http.delete<DeviceWithId>(`api/devices/${id}`);
+  deleteDevice(_id: Id) {
+    return this.http.delete<DeviceWithId>(`api/devices/${_id}`);
   }
 }

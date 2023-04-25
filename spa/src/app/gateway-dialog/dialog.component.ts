@@ -4,7 +4,7 @@ import { GatewaysService } from '../api/gateways.service';
 import { Id } from '../../types/common';
 
 export interface DialogData {
-  id?: Id;
+  _id?: Id;
   name: string;
   update: () => void;
 }
@@ -27,10 +27,10 @@ export class GatewayDialogComponent {
   };
 
   public onSave() {
-    const { id, name } = this.data;
-    if (id) {
+    const { _id, name } = this.data;
+    if (_id) {
       this.gatewaysService
-        .updateGateway(id, { name })
+        .updateGateway(_id, { name })
         .subscribe(this.onSuccess);
     } else {
       this.gatewaysService.createGateway({ name }).subscribe(this.onSuccess);
@@ -38,7 +38,7 @@ export class GatewayDialogComponent {
   }
 
   public onDelete() {
-    const { id } = this.data;
-    this.gatewaysService.deleteGateway(id!).subscribe(this.onSuccess);
+    const { _id } = this.data;
+    this.gatewaysService.deleteGateway(_id!).subscribe(this.onSuccess);
   }
 }

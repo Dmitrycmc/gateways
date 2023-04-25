@@ -1,57 +1,72 @@
 import { Injectable } from '@nestjs/common';
-import { nanoid } from 'nanoid';
-import { NotFoundError } from '../errors/NotFoundError';
 import { Device, DeviceWithId } from '../types/devices';
-import { Id } from '../types/common';
+import { config } from 'dotenv';
+import { Collection, MongoClient, ObjectId, ServerApiVersion } from 'mongodb';
+import { NotFoundError } from '../errors/NotFoundError';
+
+config();
+const { USERNAME, PASSWORD } = process.env;
+
+const uri = `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.hb0m5.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
 
 @Injectable()
 export class DevicesService {
-  private devices: DeviceWithId[] = [];
-
-  create(device: Device): DeviceWithId {
-    const entity = {
-      id: nanoid(4),
-      ...device,
-    };
-    this.devices.push(entity);
-    return entity;
+  private async exec<R>(
+    callback: (collection: Collection<Device>) => R,
+  ): Promise<R> {
+    try {
+      await client.connect();
+      const collection = client.db('gateways').collection<Device>('devices');
+      return await callback(collection);
+    } finally {
+      await client.close();
+    }
   }
 
-  readAll(): DeviceWithId[] {
-    return this.devices;
+  async create(data: Device): Promise<string> {
+    const result = await this.exec((c) => c.insertOne(data));
+    return result.insertedId.toString();
   }
 
-  read(id: Id): DeviceWithId {
-    const entity = this.devices.find((g) => g.id === id);
-    if (!entity) {
+  async readAll(): Promise<DeviceWithId[]> {
+    return this.exec((c) => c.find().toArray());
+  }
+
+  async read(id: string): Promise<DeviceWithId> {
+    const result = await this.exec((c) => c.findOne({ _id: new ObjectId(id) }));
+    if (!result) {
       throw new NotFoundError();
     }
-    return entity;
+    return result;
   }
 
-  update(id: Id, data: Device): DeviceWithId | null {
-    const entity = this.devices.find((g) => g.id === id);
-    if (!entity) {
+  async update(id: string, data: Device): Promise<DeviceWithId> {
+    const result = await this.exec((c) =>
+      c.findOneAndUpdate({ _id: new ObjectId(id) }, { $set: data }),
+    );
+    if (!result.value) {
       throw new NotFoundError();
     }
-    Object.assign(entity, data);
-    return entity;
+    return result.value;
   }
 
-  delete(id: Id): DeviceWithId | null {
-    const entity = this.devices.find((g) => g.id === id);
-    if (!entity) {
+  async delete(id: string): Promise<void> {
+    const result = await this.exec((c) =>
+      c.deleteOne({ _id: new ObjectId(id) }),
+    );
+    if (!result.deletedCount) {
       throw new NotFoundError();
     }
-    this.devices = this.devices.filter((e) => e !== entity);
-    return entity;
   }
 
-  public unbindGateway(id: Id) {
-    this.devices.forEach((device) => {
-      if (device.gatewayId === id) {
-        device.gatewayId = null;
-      }
-    });
+  async unbindGateway(id: string): Promise<void> {
+     await this.exec(c => c.updateMany({gatewayId: id}, {$set: {gatewayId: null}}))
   }
 }

@@ -4,7 +4,7 @@ import { DevicesService } from '../api/devices.service';
 import { Id } from '../../types/common';
 
 export interface DialogData {
-  id?: Id;
+  _id?: Id;
   name: string;
   gatewayId?: Id;
   update: () => void;
@@ -28,10 +28,10 @@ export class DeviceDialogComponent {
   };
 
   public onSave() {
-    const { id, name, gatewayId } = this.data;
-    if (id) {
+    const { _id, name, gatewayId } = this.data;
+    if (_id) {
       this.devicesService
-        .updateDevice(id, { name, gatewayId })
+        .updateDevice(_id, { name, gatewayId })
         .subscribe(this.onSuccess);
     } else {
       this.devicesService
@@ -41,7 +41,7 @@ export class DeviceDialogComponent {
   }
 
   public onDelete() {
-    const { id } = this.data;
-    this.devicesService.deleteDevice(id!).subscribe(this.onSuccess);
+    const { _id } = this.data;
+    this.devicesService.deleteDevice(_id!).subscribe(this.onSuccess);
   }
 }

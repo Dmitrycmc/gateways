@@ -1,49 +1,72 @@
 import { Injectable } from '@nestjs/common';
-import { nanoid } from 'nanoid';
 import { NotFoundError } from '../errors/NotFoundError';
 import { Gateway, GatewayWithId } from '../types/gateways';
-import { Id } from '../types/common';
+import { Collection, MongoClient, ObjectId, ServerApiVersion } from 'mongodb';
+import { config } from 'dotenv';
+import {DevicesService} from "../devices/devices.service";
+
+config();
+const { USERNAME, PASSWORD } = process.env;
+
+const uri = `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.hb0m5.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
 
 @Injectable()
 export class GatewaysService {
-  private gateways: GatewayWithId[] = [];
+  constructor(private devicesService: DevicesService) {}
 
-  create(gateway: Gateway): GatewayWithId {
-    const entity = {
-      id: nanoid(4),
-      ...gateway,
-    };
-    this.gateways.push(entity);
-    return entity;
+  private async exec<R>(
+    callback: (collection: Collection<Gateway>) => R,
+  ): Promise<R> {
+    try {
+      await client.connect();
+      const collection = client.db('gateways').collection<Gateway>('gateways');
+      return await callback(collection);
+    } finally {
+      await client.close();
+    }
   }
 
-  readAll(): GatewayWithId[] {
-    return this.gateways;
+  async create(data: Gateway): Promise<string> {
+    const result = await this.exec((c) => c.insertOne(data));
+    return result.insertedId.toString();
   }
 
-  read(id: Id): GatewayWithId {
-    const entity = this.gateways.find((g) => g.id === id);
-    if (!entity) {
+  async readAll(): Promise<GatewayWithId[]> {
+    return this.exec((c) => c.find().toArray());
+  }
+
+  async read(id: string): Promise<GatewayWithId> {
+    const result = await this.exec((c) => c.findOne({ _id: new ObjectId(id) }));
+    if (!result) {
       throw new NotFoundError();
     }
-    return entity;
+    return result;
   }
 
-  update(id: Id, data: Gateway): GatewayWithId | null {
-    const entity = this.gateways.find((g) => g.id === id);
-    if (!entity) {
+  async update(id: string, data: Gateway): Promise<GatewayWithId> {
+    const result = await this.exec((c) =>
+      c.findOneAndUpdate({ _id: new ObjectId(id) }, { $set: data }),
+    );
+    if (!result.value) {
       throw new NotFoundError();
     }
-    Object.assign(entity, data);
-    return entity;
+    return result.value;
   }
 
-  delete(id: Id): GatewayWithId | null {
-    const entity = this.gateways.find((g) => g.id === id);
-    if (!entity) {
+  async delete(id: string): Promise<void> {
+    const result = await this.exec((c) =>
+      c.deleteOne({ _id: new ObjectId(id) }),
+    );
+    if (!result.deletedCount) {
       throw new NotFoundError();
     }
-    this.gateways = this.gateways.filter((e) => e !== entity);
-    return entity;
+    await this.devicesService.unbindGateway(id)
   }
 }

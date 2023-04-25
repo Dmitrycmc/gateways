@@ -5,5 +5,5 @@ export type Gateway = {
 };
 
 export type GatewayWithId = Gateway & {
-  id: Id;
+  _id: Id;
 };

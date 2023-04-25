@@ -16,27 +16,27 @@ export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {}
 
   @Post()
-  create(@Body() data: Device): DeviceWithId {
-    return this.devicesService.create(data);
+  async create(@Body() data: Device): Promise<string> {
+    return JSON.stringify(await this.devicesService.create(data));
   }
 
   @Get()
-  readAll(): DeviceWithId[] {
+  readAll(): Promise<DeviceWithId[]> {
     return this.devicesService.readAll();
   }
 
   @Get('/:id')
-  read(@Param('id') id: Id): DeviceWithId {
+  read(@Param('id') id: Id): Promise<DeviceWithId> {
     return this.devicesService.read(id);
   }
 
   @Put('/:id')
-  update(@Param('id') id: Id, @Body() data: Device): DeviceWithId {
+  update(@Param('id') id: Id, @Body() data: Device): Promise<DeviceWithId> {
     return this.devicesService.update(id, data);
   }
 
   @Delete('/:id')
-  delete(@Param('id') id: Id): DeviceWithId {
+  delete(@Param('id') id: Id): Promise<void> {
     return this.devicesService.delete(id);
   }
 }

@@ -3,8 +3,8 @@
   <p class="name" *ngIf="!gateway">Unbounded devices</p>
   <div class="devices">
     <div *ngFor="let device of devices">
-      <app-device *ngIf="device.gatewayId === gateway?.id" [device]="device" [update]="update"/>
+      <app-device *ngIf="device.gatewayId === gateway?._id" [device]="device" [update]="update"/>
     </div>
-    <app-new-device [gatewayId]="gateway?.id || null" [update]="update" />
+    <app-new-device [gatewayId]="gateway?._id || null" [update]="update" />
   </div>
 </div>

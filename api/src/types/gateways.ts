@@ -1,9 +1,7 @@
-import { Id } from './common';
+import { WithId } from 'mongodb';
 
 export type Gateway = {
   name: string;
 };
 
-export type GatewayWithId = Gateway & {
-  id: Id;
-};
+export type GatewayWithId = WithId<Gateway>;
