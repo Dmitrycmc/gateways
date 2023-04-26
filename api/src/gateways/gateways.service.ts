@@ -1,72 +1,48 @@
 import { Injectable } from '@nestjs/common';
 import { NotFoundError } from '../errors/NotFoundError';
-import { Gateway, GatewayWithId } from '../types/gateways';
-import { Collection, MongoClient, ObjectId, ServerApiVersion } from 'mongodb';
-import { config } from 'dotenv';
-import {DevicesService} from "../devices/devices.service";
-
-config();
-const { USERNAME, PASSWORD } = process.env;
-
-const uri = `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.hb0m5.mongodb.net/?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { IGateway } from '../interfaces/gateway.interface';
+import { CreateGatewayDto } from '../dto/create-gateway.dto';
+import { UpdateGatewayDto } from '../dto/update-gateway.dto';
+import { Id } from '../types/common';
 
 @Injectable()
 export class GatewaysService {
-  constructor(private devicesService: DevicesService) {}
+  constructor(@InjectModel('Gateway') private model: Model<IGateway>) {}
 
-  private async exec<R>(
-    callback: (collection: Collection<Gateway>) => R,
-  ): Promise<R> {
-    try {
-      await client.connect();
-      const collection = client.db('gateways').collection<Gateway>('gateways');
-      return await callback(collection);
-    } finally {
-      await client.close();
-    }
+  async create(data: CreateGatewayDto): Promise<IGateway> {
+    const newEntity = await new this.model(data);
+    return newEntity.save();
   }
 
-  async create(data: Gateway): Promise<string> {
-    const result = await this.exec((c) => c.insertOne(data));
-    return result.insertedId.toString();
+  readAll(): Promise<IGateway[]> {
+    return this.model.find();
   }
 
-  async readAll(): Promise<GatewayWithId[]> {
-    return this.exec((c) => c.find().toArray());
-  }
-
-  async read(id: string): Promise<GatewayWithId> {
-    const result = await this.exec((c) => c.findOne({ _id: new ObjectId(id) }));
-    if (!result) {
+  async read(id: Id): Promise<IGateway> {
+    const entity = await this.model.findById(id).exec();
+    if (!entity) {
       throw new NotFoundError();
     }
-    return result;
+    return entity;
   }
 
-  async update(id: string, data: Gateway): Promise<GatewayWithId> {
-    const result = await this.exec((c) =>
-      c.findOneAndUpdate({ _id: new ObjectId(id) }, { $set: data }),
-    );
-    if (!result.value) {
+  async update(id: Id, data: UpdateGatewayDto): Promise<IGateway> {
+    const existingStudent = await this.model.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+    if (!existingStudent) {
       throw new NotFoundError();
     }
-    return result.value;
+    return existingStudent;
   }
 
-  async delete(id: string): Promise<void> {
-    const result = await this.exec((c) =>
-      c.deleteOne({ _id: new ObjectId(id) }),
-    );
-    if (!result.deletedCount) {
+  async delete(id: Id): Promise<IGateway> {
+    const deletedStudent = await this.model.findByIdAndDelete(id);
+    if (!deletedStudent) {
       throw new NotFoundError();
     }
-    await this.devicesService.unbindGateway(id)
+    return deletedStudent;
   }
 }
