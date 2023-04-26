@@ -3,6 +3,7 @@ import { DeviceWithId } from '../../types/devices';
 import { GatewayWithId } from '../../types/gateways';
 import { MatDialog } from '@angular/material/dialog';
 import { GatewayDialogComponent } from '../gateway-dialog/dialog.component';
+import { MAX_BOUND_DEVICES } from '../../constants';
 
 @Component({
   selector: 'app-gateway',
@@ -11,6 +12,8 @@ import { GatewayDialogComponent } from '../gateway-dialog/dialog.component';
 })
 export class GatewayComponent {
   constructor(public dialog: MatDialog) {}
+
+  public maxBoundDevices = MAX_BOUND_DEVICES;
 
   @Input('gateway') public gateway: GatewayWithId | null = null;
 

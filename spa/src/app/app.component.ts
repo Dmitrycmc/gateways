@@ -3,6 +3,7 @@ import { DeviceWithId } from '../types/devices';
 import { GatewayWithId } from '../types/gateways';
 import { GatewaysService } from './api/gateways.service';
 import { DevicesService } from './api/devices.service';
+import { Id } from '../types/common';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,10 @@ export class AppComponent implements OnInit {
   title = 'gateways-spa';
   gateways: GatewayWithId[] = [];
   devices: DeviceWithId[] = [];
+
+  public getBoundDevices(gatewayId: Id | null) {
+    return this.devices.filter((device) => device.gatewayId === gatewayId);
+  }
 
   constructor(
     private gatewaysService: GatewaysService,

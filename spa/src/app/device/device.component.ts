@@ -21,6 +21,7 @@ export class DeviceComponent {
         name: this.device.uid,
         vendor: this.device.vendor,
         status: this.device.status,
+        gatewayId: this.device.gatewayId,
         update: this.update,
       },
     });

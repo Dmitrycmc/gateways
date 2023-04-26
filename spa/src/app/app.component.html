@@ -1,5 +1,5 @@
 <div *ngFor="let gateway of gateways">
-  <app-gateway [gateway]="gateway" [devices]="devices" [update]="update"/>
+  <app-gateway [gateway]="gateway" [devices]="getBoundDevices(gateway._id)" [update]="update"/>
 </div>
-<app-gateway [devices]="devices" [update]="update"/>
+<app-gateway [devices]="getBoundDevices(null)" [update]="update"/>
 <app-new-gateway [update]="update"/>

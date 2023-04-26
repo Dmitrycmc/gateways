@@ -6,12 +6,24 @@ import { IDevice } from '../interfaces/device.interface';
 import { CreateDeviceDto } from '../dto/create-device.dto';
 import { UpdateDeviceDto } from '../dto/update-device.dto';
 import { Id } from '../types/common';
+import { TooManyDevicesError } from '../errors/TooManyDevicesError';
+import { MAX_BOUND_DEVICES } from '../constants';
 
 @Injectable()
 export class DevicesService {
   constructor(@InjectModel('Device') private model: Model<IDevice>) {}
 
   async create(data: CreateDeviceDto): Promise<IDevice> {
+    if (data.gatewayId) {
+      const boundEntities = await this.model.find({
+        gatewayId: data.gatewayId,
+      });
+      console.log(boundEntities.length);
+      if (boundEntities.length >= MAX_BOUND_DEVICES) {
+        throw new TooManyDevicesError(MAX_BOUND_DEVICES);
+      }
+    }
+
     const entity = await new this.model({
       ...data,
       createdAt: new Date().toISOString(),
@@ -32,6 +44,16 @@ export class DevicesService {
   }
 
   async update(id: Id, data: UpdateDeviceDto): Promise<IDevice> {
+    if (data.gatewayId) {
+      const boundEntities = await this.model.find({
+        gatewayId: data.gatewayId,
+        _id: { $ne: id },
+      });
+      if (boundEntities.length >= MAX_BOUND_DEVICES) {
+        throw new TooManyDevicesError(MAX_BOUND_DEVICES);
+      }
+    }
+
     const entity = await this.model.findByIdAndUpdate(id, data, {
       new: true,
     });
