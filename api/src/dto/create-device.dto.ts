@@ -1,12 +1,15 @@
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateDeviceDto {
-  @IsString()
-  @MaxLength(30)
-  @IsNotEmpty()
-  readonly name: string;
+  @IsNumber()
+  readonly uid: number;
 
-  @IsString()
   @IsNotEmpty()
+  readonly vendor: string;
+
+  @IsBoolean()
+  readonly status: boolean;
+
+  @IsOptional()
   readonly gatewayId: string;
 }

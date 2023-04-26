@@ -9,16 +9,22 @@ import { Id } from 'src/types/common';
 export class DevicesService {
   constructor(private http: HttpClient) {}
 
-  createDevice(data: Device) {
-    return this.http.post<DeviceWithId>('api/devices', data);
+  createDevice(data: Omit<Device, 'createdAt'>) {
+    return this.http.post<DeviceWithId>('api/devices', {
+      ...data,
+      status: data.status || false,
+    });
   }
 
   getDevices() {
     return this.http.get<DeviceWithId[]>('api/devices');
   }
 
-  updateDevice(_id: Id, data: Device) {
-    return this.http.put<DeviceWithId>(`api/devices/${_id}`, data);
+  updateDevice(_id: Id, data: Omit<Device, 'createdAt'>) {
+    return this.http.put<DeviceWithId>(`api/devices/${_id}`, {
+      ...data,
+      status: data.status || false,
+    });
   }
 
   deleteDevice(_id: Id) {

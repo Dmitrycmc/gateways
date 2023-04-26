@@ -1,8 +1,13 @@
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, Validate } from 'class-validator';
+import { IPv4ValidRule } from '../validators/IPv4.validator';
 
 export class CreateGatewayDto {
-  @IsString()
-  @MaxLength(30)
+  @IsNotEmpty()
+  readonly serialNumber: string;
+
   @IsNotEmpty()
   readonly name: string;
+
+  @Validate(IPv4ValidRule)
+  readonly IPv4: string;
 }

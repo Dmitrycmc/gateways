@@ -11,7 +11,7 @@ import { GatewaysService } from './gateways.service';
 import { Id } from '../types/common';
 import { IGateway } from '../interfaces/gateway.interface';
 import { CreateGatewayDto } from '../dto/create-gateway.dto';
-import { UpdateDeviceDto } from '../dto/update-device.dto';
+import { UpdateGatewayDto } from '../dto/update-gateway.dto';
 
 @Controller('api/gateways')
 export class GatewaysController {
@@ -35,7 +35,7 @@ export class GatewaysController {
   @Put('/:id')
   update(
     @Param('id') id: Id,
-    @Body() data: UpdateDeviceDto,
+    @Body() data: UpdateGatewayDto,
   ): Promise<IGateway> {
     return this.gatewaysService.update(id, data);
   }

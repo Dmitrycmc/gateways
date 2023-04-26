@@ -5,7 +5,9 @@ import { Id } from '../../types/common';
 
 export interface DialogData {
   _id?: Id;
-  name: string;
+  uid: number;
+  vendor: string;
+  status: boolean;
   gatewayId?: Id;
   update: () => void;
 }
@@ -28,14 +30,14 @@ export class DeviceDialogComponent {
   };
 
   public onSave() {
-    const { _id, name, gatewayId } = this.data;
+    const { _id, uid, vendor, status, gatewayId } = this.data;
     if (_id) {
       this.devicesService
-        .updateDevice(_id, { name, gatewayId })
+        .updateDevice(_id, { uid, vendor, status, gatewayId })
         .subscribe(this.onSuccess);
     } else {
       this.devicesService
-        .createDevice({ name, gatewayId })
+        .createDevice({ uid, vendor, status, gatewayId })
         .subscribe(this.onSuccess);
     }
   }

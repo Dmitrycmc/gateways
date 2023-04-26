@@ -12,8 +12,11 @@ export class DevicesService {
   constructor(@InjectModel('Device') private model: Model<IDevice>) {}
 
   async create(data: CreateDeviceDto): Promise<IDevice> {
-    const newEntity = await new this.model(data);
-    return newEntity.save();
+    const entity = await new this.model({
+      ...data,
+      createdAt: new Date().toISOString(),
+    });
+    return entity.save();
   }
 
   readAll(): Promise<IDevice[]> {
@@ -21,7 +24,7 @@ export class DevicesService {
   }
 
   async read(id: Id): Promise<IDevice> {
-    const entity = await this.model.findById(id).exec();
+    const entity = await this.model.findById(id);
     if (!entity) {
       throw new NotFoundError();
     }
@@ -29,21 +32,21 @@ export class DevicesService {
   }
 
   async update(id: Id, data: UpdateDeviceDto): Promise<IDevice> {
-    const existingStudent = await this.model.findByIdAndUpdate(id, data, {
+    const entity = await this.model.findByIdAndUpdate(id, data, {
       new: true,
     });
-    if (!existingStudent) {
+    if (!entity) {
       throw new NotFoundError();
     }
-    return existingStudent;
+    return entity;
   }
 
   async delete(id: Id): Promise<IDevice> {
-    const deletedStudent = await this.model.findByIdAndDelete(id);
-    if (!deletedStudent) {
+    const entity = await this.model.findByIdAndDelete(id);
+    if (!entity) {
       throw new NotFoundError();
     }
-    return deletedStudent;
+    return entity;
   }
 
   /*async unbindGateway(id: Id): Promise<void> {

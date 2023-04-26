@@ -3,7 +3,16 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema()
 export class Device {
   @Prop()
-  name: string;
+  uid: number;
+
+  @Prop()
+  vendor: string;
+
+  @Prop()
+  createdAt: string;
+
+  @Prop()
+  status: boolean;
 
   @Prop()
   gatewayId: string;

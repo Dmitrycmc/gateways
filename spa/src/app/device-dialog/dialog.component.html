@@ -1,7 +1,9 @@
 <h1 mat-dialog-title *ngIf="!data._id">Create new device</h1>
 <h1 mat-dialog-title *ngIf="data._id">Edit device</h1>
 <div mat-dialog-content (keyup.enter)="onSave()">
-  Name: <input [(ngModel)]="data.name" />
+  uid: <input [(ngModel)]="data.uid" type="number" />
+  vendor: <input [(ngModel)]="data.vendor" />
+  status: <input [(ngModel)]="data.status" type="checkbox"/>
   <div class="buttons-container">
     <button mat-button (click)="onSave()">Save</button>
     <button mat-button (click)="onDelete()" *ngIf="data._id" color="warn">Delete</button>

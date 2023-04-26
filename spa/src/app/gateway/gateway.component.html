@@ -1,5 +1,9 @@
 <div class="wrapper">
-  <p class="name-button" (click)="openDialog()" *ngIf="gateway">{{gateway.name}}</p>
+  <div (click)="openDialog()" *ngIf="gateway">
+    <p class="name-button">name: {{gateway.name}}</p>
+    <p class="name-button">IPv4: {{gateway.IPv4}}</p>
+    <p class="name-button">serialNumber: {{gateway.serialNumber}}</p>
+  </div>
   <p class="name" *ngIf="!gateway">Unbounded devices</p>
   <div class="devices">
     <div *ngFor="let device of devices">

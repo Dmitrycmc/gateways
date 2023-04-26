@@ -5,7 +5,9 @@ import { Id } from '../../types/common';
 
 export interface DialogData {
   _id?: Id;
+  serialNumber: string;
   name: string;
+  IPv4: string;
   update: () => void;
 }
 
@@ -27,13 +29,15 @@ export class GatewayDialogComponent {
   };
 
   public onSave() {
-    const { _id, name } = this.data;
+    const { _id, serialNumber, name, IPv4 } = this.data;
     if (_id) {
       this.gatewaysService
-        .updateGateway(_id, { name })
+        .updateGateway(_id, { serialNumber, name, IPv4 })
         .subscribe(this.onSuccess);
     } else {
-      this.gatewaysService.createGateway({ name }).subscribe(this.onSuccess);
+      this.gatewaysService
+        .createGateway({ serialNumber, name, IPv4 })
+        .subscribe(this.onSuccess);
     }
   }
 

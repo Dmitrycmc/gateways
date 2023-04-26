@@ -18,7 +18,9 @@ export class DeviceComponent {
     this.dialog.open(DeviceDialogComponent, {
       data: {
         _id: this.device._id,
-        name: this.device.name,
+        name: this.device.uid,
+        vendor: this.device.vendor,
+        status: this.device.status,
         update: this.update,
       },
     });

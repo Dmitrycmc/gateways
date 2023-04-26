@@ -1,7 +1,10 @@
 import { Id } from './common';
 
 export type Device = {
-  name: string;
+  uid: number;
+  vendor: string;
+  createdAt: string;
+  status: boolean;
   gatewayId?: Id;
 };
 

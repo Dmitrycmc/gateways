@@ -21,7 +21,9 @@ export class GatewayComponent {
     this.dialog.open(GatewayDialogComponent, {
       data: {
         _id: this.gateway?._id,
+        serialNumber: this.gateway?.serialNumber,
         name: this.gateway?.name,
+        IPv4: this.gateway?.IPv4,
         update: this.update,
       },
     });

@@ -12,8 +12,11 @@ export class GatewaysService {
   constructor(@InjectModel('Gateway') private model: Model<IGateway>) {}
 
   async create(data: CreateGatewayDto): Promise<IGateway> {
-    const newEntity = await new this.model(data);
-    return newEntity.save();
+    const entity = await new this.model({
+      ...data,
+      createdAt: new Date().toISOString(),
+    });
+    return entity.save();
   }
 
   readAll(): Promise<IGateway[]> {
@@ -21,7 +24,7 @@ export class GatewaysService {
   }
 
   async read(id: Id): Promise<IGateway> {
-    const entity = await this.model.findById(id).exec();
+    const entity = await this.model.findById(id);
     if (!entity) {
       throw new NotFoundError();
     }
@@ -29,20 +32,20 @@ export class GatewaysService {
   }
 
   async update(id: Id, data: UpdateGatewayDto): Promise<IGateway> {
-    const existingStudent = await this.model.findByIdAndUpdate(id, data, {
+    const entity = await this.model.findByIdAndUpdate(id, data, {
       new: true,
     });
-    if (!existingStudent) {
+    if (!entity) {
       throw new NotFoundError();
     }
-    return existingStudent;
+    return entity;
   }
 
   async delete(id: Id): Promise<IGateway> {
-    const deletedStudent = await this.model.findByIdAndDelete(id);
-    if (!deletedStudent) {
+    const entity = await this.model.findByIdAndDelete(id);
+    if (!entity) {
       throw new NotFoundError();
     }
-    return deletedStudent;
+    return entity;
   }
 }

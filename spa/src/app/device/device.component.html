@@ -1,3 +1,6 @@
 <mat-card class="wrapper" (click)="openDialog()">
-  <mat-card-content>{{device.name}}</mat-card-content>
+  <mat-card-content>uid: {{device.uid}}</mat-card-content>
+  <mat-card-content>vendor: {{device.vendor}}</mat-card-content>
+  <mat-card-content>createdAt: {{device.createdAt}}</mat-card-content>
+  <mat-card-content>status: {{device.status ? 'On' : 'Off'}}</mat-card-content>
 </mat-card>
