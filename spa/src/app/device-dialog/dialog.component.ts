@@ -18,6 +18,12 @@ export interface DialogData {
   styleUrls: ['./dialog.component.css'],
 })
 export class DeviceDialogComponent {
+  private errorMap: Record<string, string> = {};
+
+  public getError(fieldName: string): string {
+    return this.errorMap[fieldName];
+  }
+
   constructor(
     private dialogRef: MatDialogRef<DeviceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -29,16 +35,28 @@ export class DeviceDialogComponent {
     this.data.update();
   };
 
+  private onError = (e: any) => {
+    const messages = e?.error?.message;
+
+    if (messages) {
+      this.errorMap = {};
+
+      messages.forEach((message: string) => {
+        this.errorMap[message.split(' ')[0]] = message;
+      });
+    }
+  };
+
   public onSave() {
     const { _id, uid, vendor, status, gatewayId } = this.data;
     if (_id) {
       this.devicesService
         .updateDevice(_id, { uid, vendor, status, gatewayId })
-        .subscribe(this.onSuccess);
+        .subscribe({ next: this.onSuccess, error: this.onError });
     } else {
       this.devicesService
         .createDevice({ uid, vendor, status, gatewayId })
-        .subscribe(this.onSuccess);
+        .subscribe({ next: this.onSuccess, error: this.onError });
     }
   }
 

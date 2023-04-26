@@ -17,6 +17,12 @@ export interface DialogData {
   styleUrls: ['./dialog.component.css'],
 })
 export class GatewayDialogComponent {
+  private errorMap: Record<string, string> = {};
+
+  public getError(fieldName: string): string {
+    return this.errorMap[fieldName];
+  }
+
   constructor(
     private dialogRef: MatDialogRef<GatewayDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -28,16 +34,28 @@ export class GatewayDialogComponent {
     this.data.update();
   };
 
+  private onError = (e: any) => {
+    const messages = e?.error?.message;
+
+    if (messages) {
+      this.errorMap = {};
+
+      messages.forEach((message: string) => {
+        this.errorMap[message.split(' ')[0]] = message;
+      });
+    }
+  };
+
   public onSave() {
     const { _id, serialNumber, name, IPv4 } = this.data;
     if (_id) {
       this.gatewaysService
         .updateGateway(_id, { serialNumber, name, IPv4 })
-        .subscribe(this.onSuccess);
+        .subscribe({ next: this.onSuccess, error: this.onError });
     } else {
       this.gatewaysService
         .createGateway({ serialNumber, name, IPv4 })
-        .subscribe(this.onSuccess);
+        .subscribe({ next: this.onSuccess, error: this.onError });
     }
   }
 

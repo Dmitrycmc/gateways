@@ -6,10 +6,14 @@
       <mat-label>Uid</mat-label>
       <input matInput [(ngModel)]="data.uid" type="number" (keyup.enter)="onSave()">
     </mat-form-field>
+    <mat-error class="error">{{getError('uid')}}</mat-error>
+
     <mat-form-field>
       <mat-label>Vendor</mat-label>
       <input matInput [(ngModel)]="data.vendor" (keyup.enter)="onSave()">
     </mat-form-field>
+    <mat-error class="error">{{getError('vendor')}}</mat-error>
+
     <mat-checkbox [(ngModel)]="data.status">Status</mat-checkbox>
   </div>
   <div class="buttons-container">

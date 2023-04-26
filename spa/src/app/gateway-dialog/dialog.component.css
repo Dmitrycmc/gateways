@@ -9,3 +9,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.error {
+  position: relative;
+  top: -20px;
+}

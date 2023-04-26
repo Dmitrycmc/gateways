@@ -6,14 +6,19 @@
       <mat-label>Name</mat-label>
       <input matInput [(ngModel)]="data.name" (keyup.enter)="onSave()">
     </mat-form-field>
+    <mat-error class="error">{{getError('name')}}</mat-error>
+
     <mat-form-field>
       <mat-label>SerialNumber</mat-label>
       <input matInput [(ngModel)]="data.serialNumber" (keyup.enter)="onSave()">
     </mat-form-field>
+    <mat-error class="error">{{getError('serialNumber')}}</mat-error>
+
     <mat-form-field>
       <mat-label>IPv4</mat-label>
       <input matInput [(ngModel)]="data.IPv4" (keyup.enter)="onSave()">
     </mat-form-field>
+    <mat-error class="error">{{getError('IPv4')}}</mat-error>
   </div>
   <div class="buttons-container">
     <button mat-button (click)="onSave()">Save</button>
