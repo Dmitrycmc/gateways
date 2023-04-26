@@ -1,7 +1,11 @@
-<div cdkDropListGroup>
-  <div *ngFor="let gateway of gateways">
-    <app-gateway [gateway]="gateway" [devices]="getBoundDevices(gateway._id)" [update]="update"/>
+<div class="page-container">
+  <div cdkDropListGroup>
+    <div *ngFor="let gateway of gateways">
+      <app-gateway [gateway]="gateway" [devices]="getBoundDevices(gateway._id)" [update]="update"/>
+    </div>
+    <app-gateway [devices]="getBoundDevices(null)" [update]="update"/>
+    <app-new-gateway [update]="update"/>
   </div>
-  <app-gateway [devices]="getBoundDevices(null)" [update]="update"/>
-  <app-new-gateway [update]="update"/>
+
+  <app-footer />
 </div>
