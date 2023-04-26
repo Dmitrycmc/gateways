@@ -6,6 +6,9 @@ import { IGateway } from '../interfaces/gateway.interface';
 import { CreateGatewayDto } from '../dto/create-gateway.dto';
 import { UpdateGatewayDto } from '../dto/update-gateway.dto';
 import { Id } from '../types/common';
+import { DuplicateSerialNumberError } from '../errors/DuplicateSerialNumberError';
+
+const MONGO_DUPLICATE_ERROR = 11000;
 
 @Injectable()
 export class GatewaysService {
@@ -16,7 +19,15 @@ export class GatewaysService {
       ...data,
       createdAt: new Date().toISOString(),
     });
-    return entity.save();
+
+    try {
+      return await entity.save();
+    } catch (e) {
+      if (e.code === MONGO_DUPLICATE_ERROR) {
+        throw new DuplicateSerialNumberError();
+      }
+      throw e;
+    }
   }
 
   readAll(): Promise<IGateway[]> {

@@ -2,13 +2,23 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Gateway {
-  @Prop()
+  @Prop({
+    required: true,
+    unique: true,
+    type: String,
+  })
   serialNumber: string;
 
-  @Prop()
+  @Prop({
+    required: true,
+    type: String,
+  })
   name: string;
 
-  @Prop()
+  @Prop({
+    required: true,
+    type: String,
+  })
   IPv4: string;
 }
 
