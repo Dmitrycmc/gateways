@@ -1,10 +1,13 @@
 <div class="wrapper">
-  <div (click)="openDialog()" *ngIf="gateway">
-    <p class="name-button">name: {{gateway.name}}</p>
-    <p class="name-button">IPv4: {{gateway.IPv4}}</p>
-    <p class="name-button">serialNumber: {{gateway.serialNumber}}</p>
-  </div>
-  <p class="name" *ngIf="!gateway">Unbounded devices</p>
+  <mat-card class="gateway-info" (click)="openDialog()" *ngIf="gateway">
+    <div>Name</div><div>{{gateway.name}}</div>
+    <div>Serial number</div><div>{{gateway.serialNumber}}</div>
+    <div>IPv4</div><div>{{gateway.IPv4}}</div>
+  </mat-card>
+  <mat-card class="unbounded-info" *ngIf="!gateway">
+    <div *ngIf="!gateway">Unattached devices</div>
+  </mat-card>
+
   <div class="devices">
     <div *ngFor="let device of devices">
       <app-device [device]="device" [update]="update"/>

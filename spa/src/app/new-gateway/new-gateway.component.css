@@ -1,16 +1,24 @@
 .wrapper {
-  width: 80px;
-  height: 80px;
+  height: 110px;
+  width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background: #9ACD3244;
-  border: solid 1px #9ACD32;
+  background: #327ACD44;
+  border: solid 1px #327ACD;
   border-radius: 8px;
 
   cursor: pointer;
+
+  opacity: 0.2;
+
+  transition: opacity 0.2s;
+}
+
+.wrapper:hover {
+  opacity: 1;
 }
 
 .name {

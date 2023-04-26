@@ -15,6 +15,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { DeviceDialogComponent } from './device-dialog/dialog.component';
 import { GatewayDialogComponent } from './gateway-dialog/dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { GatewayDialogComponent } from './gateway-dialog/dialog.component';
     MatDialogModule,
     MatButtonModule,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
   ],
   providers: [GatewaysService, DevicesService],
   bootstrap: [AppComponent],

@@ -1,23 +1,57 @@
 .wrapper {
+  height: 110px;
+  width: 100%;
+
+  margin-bottom: 8px;
+
   display: flex;
   align-items: center;
 
-  background: #9ACD3244;
-  border: solid 1px #9ACD32;
+  background: #327ACD44;
+  border: solid 1px #327ACD;
   border-radius: 8px;
-
-  margin-bottom: 8px;
 }
 
 .devices {
   display: flex;
+  overflow: scroll;
 }
 
 .name {
-  margin: 15px;
 }
 
-.name-button {
-  margin: 15px;
+.gateway-info {
+  width: 260px;
+  height: 100px;
+
+  padding: 5px;
+  margin: 0 8px;
+
+  background: #327ACD44;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
   cursor: pointer;
+}
+
+.unbounded-info {
+  width: 260px;
+  height: 100px;
+
+  margin: 0 8px;
+
+  background-color: #327ACD44;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
 }
