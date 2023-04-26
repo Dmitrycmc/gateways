@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Schema as M } from 'mongoose';
 
 @Schema()
 export class Device {
@@ -27,7 +28,8 @@ export class Device {
   status: boolean;
 
   @Prop({
-    type: String,
+    type: M.Types.ObjectId,
+    ref: 'Gateway',
   })
   gatewayId: string;
 }

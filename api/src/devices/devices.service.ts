@@ -18,7 +18,6 @@ export class DevicesService {
       const boundEntities = await this.model.find({
         gatewayId: data.gatewayId,
       });
-      console.log(boundEntities.length);
       if (boundEntities.length >= MAX_BOUND_DEVICES) {
         throw new TooManyDevicesError(MAX_BOUND_DEVICES);
       }
@@ -71,7 +70,7 @@ export class DevicesService {
     return entity;
   }
 
-  /*async unbindGateway(id: Id): Promise<void> {
-     await this.exec(c => c.updateMany({gatewayId: id}, {$set: {gatewayId: null}}))
-  }*/
+  async unbindGateway(gatewayId: Id): Promise<void> {
+    await this.model.updateMany({ gatewayId }, { gatewayId: null });
+  }
 }

@@ -7,12 +7,16 @@ import { CreateGatewayDto } from '../dto/create-gateway.dto';
 import { UpdateGatewayDto } from '../dto/update-gateway.dto';
 import { Id } from '../types/common';
 import { DuplicateSerialNumberError } from '../errors/DuplicateSerialNumberError';
+import { DevicesService } from '../devices/devices.service';
 
 const MONGO_DUPLICATE_ERROR = 11000;
 
 @Injectable()
 export class GatewaysService {
-  constructor(@InjectModel('Gateway') private model: Model<IGateway>) {}
+  constructor(
+    @InjectModel('Gateway') private model: Model<IGateway>,
+    private devicesService: DevicesService,
+  ) {}
 
   async create(data: CreateGatewayDto): Promise<IGateway> {
     const entity = await new this.model({
@@ -57,6 +61,7 @@ export class GatewaysService {
     if (!entity) {
       throw new NotFoundError();
     }
+    this.devicesService.unbindGateway(id);
     return entity;
   }
 }
