@@ -10,14 +10,13 @@
   background: #327ACD44;
   border: solid 1px #327ACD;
   border-radius: 8px;
+
+  transition: background-color 0.2s;
 }
 
 .devices {
   display: flex;
   overflow: scroll;
-}
-
-.name {
 }
 
 .gateway-info {
@@ -54,4 +53,13 @@
   flex-shrink: 0;
 
   border-radius: 8px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+  transition: opacity 0.2ms ;
+}
+
+.cdk-drop-list-dragging {
+  background-color: #1c4881
 }

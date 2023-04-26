@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" cdkDropList [cdkDropListData]="devices" (cdkDropListDropped)="drop($event)" cdkDropListSortingDisabled [attr.data-gatewayId]="gateway?._id">
   <mat-card class="gateway-info" (click)="openDialog()" *ngIf="gateway">
     <div>Name</div><div>{{gateway.name}}</div>
     <div>Serial number</div><div>{{gateway.serialNumber}}</div>
@@ -9,7 +9,7 @@
   </mat-card>
 
   <div class="devices">
-    <div *ngFor="let device of devices">
+    <div *ngFor="let device of devices" cdkDrag class="device" [attr.data-id]="device._id">
       <app-device [device]="device" [update]="update"/>
     </div>
     <app-new-device *ngIf="devices.length < maxBoundDevices || !gateway" [gatewayId]="gateway?._id || null" [update]="update" />

@@ -8,6 +8,7 @@ import { UpdateGatewayDto } from '../dto/update-gateway.dto';
 import { Id } from '../types/common';
 import { DuplicateSerialNumberError } from '../errors/DuplicateSerialNumberError';
 import { DevicesService } from '../devices/devices.service';
+import { UpdateGatewayPartiallyDto } from '../dto/update-gateway-partially';
 
 const MONGO_DUPLICATE_ERROR = 11000;
 
@@ -46,7 +47,10 @@ export class GatewaysService {
     return entity;
   }
 
-  async update(id: Id, data: UpdateGatewayDto): Promise<IGateway> {
+  async update(
+    id: Id,
+    data: UpdateGatewayDto | UpdateGatewayPartiallyDto,
+  ): Promise<IGateway> {
     const entity = await this.model.findByIdAndUpdate(id, data, {
       new: true,
     });

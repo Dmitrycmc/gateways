@@ -18,6 +18,7 @@ import { GatewayDialogComponent } from './gateway-dialog/dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    CdkDropList,
+    CdkDrag,
+    CdkDropListGroup,
   ],
   providers: [GatewaysService, DevicesService],
   bootstrap: [AppComponent],

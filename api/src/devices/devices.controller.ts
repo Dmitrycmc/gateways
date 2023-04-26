@@ -6,12 +6,14 @@ import {
   Param,
   Delete,
   Put,
+  Patch,
 } from '@nestjs/common';
 import { DevicesService } from './devices.service';
 import { Id } from '../types/common';
 import { IDevice } from '../interfaces/device.interface';
 import { CreateDeviceDto } from '../dto/create-device.dto';
 import { UpdateDeviceDto } from '../dto/update-device.dto';
+import { UpdateDevicePartiallyDto } from '../dto/update-device-partially';
 
 @Controller('api/devices')
 export class DevicesController {
@@ -34,6 +36,14 @@ export class DevicesController {
 
   @Put('/:id')
   update(@Param('id') id: Id, @Body() data: UpdateDeviceDto): Promise<IDevice> {
+    return this.devicesService.update(id, data);
+  }
+
+  @Patch('/:id')
+  updatePartially(
+    @Param('id') id: Id,
+    @Body() data: UpdateDevicePartiallyDto,
+  ): Promise<IDevice> {
     return this.devicesService.update(id, data);
   }
 

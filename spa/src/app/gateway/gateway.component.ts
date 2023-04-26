@@ -4,6 +4,8 @@ import { GatewayWithId } from '../../types/gateways';
 import { MatDialog } from '@angular/material/dialog';
 import { GatewayDialogComponent } from '../gateway-dialog/dialog.component';
 import { MAX_BOUND_DEVICES } from '../../constants';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { DevicesService } from '../api/devices.service';
 
 @Component({
   selector: 'app-gateway',
@@ -11,7 +13,10 @@ import { MAX_BOUND_DEVICES } from '../../constants';
   styleUrls: ['./gateway.component.css'],
 })
 export class GatewayComponent {
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private devicesService: DevicesService,
+  ) {}
 
   public maxBoundDevices = MAX_BOUND_DEVICES;
 
@@ -30,5 +35,20 @@ export class GatewayComponent {
         update: this.update,
       },
     });
+  }
+
+  drop(event: CdkDragDrop<DeviceWithId[]>) {
+    const newGatewayId =
+      /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+      // @ts-ignore
+      event.container.element.nativeElement.dataset.gatewayid || null;
+    /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+    // @ts-ignore
+    const id = event.item.element.nativeElement.dataset.id!;
+    if (event.previousContainer !== event.container) {
+      this.devicesService
+        .updatePartiallyDevice(id, { gatewayId: newGatewayId })
+        .subscribe(this.update);
+    }
   }
 }

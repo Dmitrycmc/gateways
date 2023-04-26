@@ -51,11 +51,16 @@ export class DeviceDialogComponent {
     const { _id, uid, vendor, status, gatewayId } = this.data;
     if (_id) {
       this.devicesService
-        .updateDevice(_id, { uid, vendor, status, gatewayId })
+        .updateDevice(_id, {
+          uid,
+          vendor,
+          status,
+          gatewayId: gatewayId || null,
+        })
         .subscribe({ next: this.onSuccess, error: this.onError });
     } else {
       this.devicesService
-        .createDevice({ uid, vendor, status, gatewayId })
+        .createDevice({ uid, vendor, status, gatewayId: gatewayId || null })
         .subscribe({ next: this.onSuccess, error: this.onError });
     }
   }

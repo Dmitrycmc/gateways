@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
@@ -12,6 +13,7 @@ import { Id } from '../types/common';
 import { IGateway } from '../interfaces/gateway.interface';
 import { CreateGatewayDto } from '../dto/create-gateway.dto';
 import { UpdateGatewayDto } from '../dto/update-gateway.dto';
+import { UpdateGatewayPartiallyDto } from '../dto/update-gateway-partially';
 
 @Controller('api/gateways')
 export class GatewaysController {
@@ -36,6 +38,14 @@ export class GatewaysController {
   update(
     @Param('id') id: Id,
     @Body() data: UpdateGatewayDto,
+  ): Promise<IGateway> {
+    return this.gatewaysService.update(id, data);
+  }
+
+  @Patch('/:id')
+  updatePartially(
+    @Param('id') id: Id,
+    @Body() data: UpdateGatewayPartiallyDto,
   ): Promise<IGateway> {
     return this.gatewaysService.update(id, data);
   }

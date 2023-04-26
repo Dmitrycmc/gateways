@@ -5,7 +5,7 @@ export type Device = {
   vendor: string;
   createdAt: string;
   status: boolean;
-  gatewayId?: Id;
+  gatewayId: Id | null;
 };
 
 export type DeviceWithId = Device & {

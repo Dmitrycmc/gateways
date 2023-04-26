@@ -31,6 +31,13 @@ export class DevicesService {
     });
   }
 
+  updatePartiallyDevice(_id: Id, data: Partial<Omit<Device, 'createdAt'>>) {
+    return this.http.patch<DeviceWithId>(`api/devices/${_id}`, {
+      ...data,
+      status: data.status || false,
+    });
+  }
+
   deleteDevice(_id: Id) {
     return this.http.delete<DeviceWithId>(`api/devices/${_id}`);
   }

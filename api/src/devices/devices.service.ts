@@ -8,6 +8,7 @@ import { UpdateDeviceDto } from '../dto/update-device.dto';
 import { Id } from '../types/common';
 import { TooManyDevicesError } from '../errors/TooManyDevicesError';
 import { MAX_BOUND_DEVICES } from '../constants';
+import { UpdateDevicePartiallyDto } from '../dto/update-device-partially';
 
 @Injectable()
 export class DevicesService {
@@ -42,7 +43,10 @@ export class DevicesService {
     return entity;
   }
 
-  async update(id: Id, data: UpdateDeviceDto): Promise<IDevice> {
+  async update(
+    id: Id,
+    data: UpdateDeviceDto | UpdateDevicePartiallyDto,
+  ): Promise<IDevice> {
     if (data.gatewayId) {
       const boundEntities = await this.model.find({
         gatewayId: data.gatewayId,
