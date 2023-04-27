@@ -61,9 +61,7 @@ export class GatewayComponent {
     }
   }
 
-  notFull = this.devices.length < this.maxBoundDevices || !this.gateway;
-
-  dropPredicate = () => {
-    return this.notFull;
+  isNotFull = () => {
+    return this.devices.length < this.maxBoundDevices || !this.gateway;
   };
 }
