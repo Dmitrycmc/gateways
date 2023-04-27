@@ -8,9 +8,14 @@
   [attr.data-gatewayId]="gateway?._id"
 >
   <mat-card class="info gateway-info desktop pointer" (click)="openDialog()" *ngIf="gateway">
-    <div>Name</div><div>{{gateway.name}}</div>
-    <div>Serial number</div><div>{{gateway.serialNumber}}</div>
-    <div>IPv4</div><div>{{gateway.IPv4}}</div>
+    <div>Name</div>
+    <div class="ellipsis" [title]="gateway.name">{{gateway.name}}</div>
+
+    <div>Serial number</div>
+    <div class="ellipsis" [title]="gateway.serialNumber">{{gateway.serialNumber}}</div>
+
+    <div>IPv4</div>
+    <div>{{gateway.IPv4}}</div>
   </mat-card>
 
   <mat-card class="info gateway-info mobile" *ngIf="gateway">

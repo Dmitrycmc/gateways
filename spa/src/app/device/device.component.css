@@ -24,6 +24,11 @@
   color: white;
 }
 
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media screen and (max-width: 500px) {
   .wrapper {
     margin: 0 0 8px;

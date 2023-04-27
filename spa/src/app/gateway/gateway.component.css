@@ -30,7 +30,7 @@
   flex-shrink: 0;
   border-radius: 8px;
 
-  text-align: center;
+  text-align: left;
 }
 
 .gateway-info {
@@ -44,10 +44,14 @@
   cursor: pointer;
 }
 
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .unattached-info {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .cdk-drag-placeholder {
