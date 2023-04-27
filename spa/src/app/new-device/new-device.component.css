@@ -24,3 +24,11 @@
 :host-context(.wrapper.cdk-drop-list-dragging:hover) .wrapper {
   opacity: 0;
 }
+
+@media screen and (max-width: 500px) {
+  .wrapper {
+    width: 30px;
+    height: 20px;
+    opacity: 1;
+  }
+}

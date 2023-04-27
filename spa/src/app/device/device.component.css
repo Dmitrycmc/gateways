@@ -23,3 +23,9 @@
   background: green;
   color: white;
 }
+
+@media screen and (max-width: 500px) {
+  .wrapper {
+    margin-bottom: 8px;
+  }
+}

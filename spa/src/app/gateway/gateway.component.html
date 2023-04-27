@@ -7,10 +7,14 @@
   (cdkDropListDropped)="drop($event)"
   [attr.data-gatewayId]="gateway?._id"
 >
-  <mat-card class="info gateway-info" (click)="openDialog()" *ngIf="gateway">
+  <mat-card class="info gateway-info desktop" (click)="openDialog()" *ngIf="gateway">
     <div>Name</div><div>{{gateway.name}}</div>
     <div>Serial number</div><div>{{gateway.serialNumber}}</div>
     <div>IPv4</div><div>{{gateway.IPv4}}</div>
+  </mat-card>
+  <mat-card class="info gateway-info mobile" *ngIf="gateway">
+    <div (click)="openDialog()">{{gateway.name}} ({{gateway.serialNumber}}) {{gateway.IPv4}}</div>
+    <app-new-device class="mobile" *ngIf="devices.length < maxBoundDevices || !gateway" [gatewayId]="gateway._id" [update]="update" />
   </mat-card>
   <mat-card class="info unattached-info" *ngIf="!gateway">
     <div *ngIf="!gateway">Unattached devices</div>
@@ -20,6 +24,6 @@
     <div *ngFor="let device of devices" cdkDrag class="device" [attr.data-id]="device._id">
       <app-device [device]="device" [update]="update"/>
     </div>
-    <app-new-device *ngIf="devices.length < maxBoundDevices || !gateway" [gatewayId]="gateway?._id || null" [update]="update" />
+    <app-new-device class="desktop" *ngIf="devices.length < maxBoundDevices || !gateway" [gatewayId]="gateway?._id || null" [update]="update" />
   </div>
 </div>

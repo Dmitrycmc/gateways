@@ -14,3 +14,9 @@
   position: relative;
   top: -20px;
 }
+
+@media screen and (max-width: 500px) {
+  .fields-container {
+    width: auto;
+  }
+}

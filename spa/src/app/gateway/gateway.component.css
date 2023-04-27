@@ -30,6 +30,8 @@
 
   flex-shrink: 0;
   border-radius: 8px;
+
+  text-align: center;
 }
 
 .gateway-info {
@@ -54,4 +56,27 @@
 
 .cdk-drop-list-dragging:not(.full) {
   background-color: #1c4881
+}
+
+@media screen and (max-width: 500px) {
+  .wrapper {
+    flex-direction: column;
+    height: unset;
+  }
+
+  .devices {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .info {
+    height: unset;
+    width: 100%;
+    background: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    box-shadow: none;
+  }
 }
