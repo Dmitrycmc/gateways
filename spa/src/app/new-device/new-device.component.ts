@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Id } from '../../types/common';
-import { DeviceDialogComponent } from '../device-dialog/dialog.component';
+import { DeviceDialogComponent } from '../dialog/device-dialog.component';
 
 @Component({
   selector: 'app-new-device',

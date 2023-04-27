@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GatewayDialogComponent } from '../gateway-dialog/dialog.component';
+import { GatewayDialogComponent } from '../dialog/gateway-dialog.component';
 
 @Component({
   selector: 'app-new-gateway',

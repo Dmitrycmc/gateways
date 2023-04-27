@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DeviceWithId } from '../../types/devices';
-import { DeviceDialogComponent } from '../device-dialog/dialog.component';
+import { DeviceDialogComponent } from '../dialog/device-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

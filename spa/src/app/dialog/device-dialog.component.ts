@@ -1,21 +1,22 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { GatewaysService } from '../api/gateways.service';
+import { DevicesService } from '../api/devices.service';
 import { Id } from '../../types/common';
 
 export interface DialogData {
   _id?: Id;
-  serialNumber: string;
-  name: string;
-  IPv4: string;
+  uid: number;
+  vendor: string;
+  status: boolean;
+  gatewayId?: Id;
 }
 
 @Component({
-  selector: 'app-gateway-dialog',
-  templateUrl: './dialog.component.html',
+  selector: 'app-device-dialog',
+  templateUrl: './device-dialog.component.html',
   styleUrls: ['./dialog.component.css'],
 })
-export class GatewayDialogComponent {
+export class DeviceDialogComponent {
   private errorMap: Record<string, string> = {};
 
   public getError(fieldName: string): string {
@@ -23,9 +24,9 @@ export class GatewayDialogComponent {
   }
 
   constructor(
-    private dialogRef: MatDialogRef<GatewayDialogComponent>,
+    private dialogRef: MatDialogRef<DeviceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private gatewaysService: GatewaysService,
+    private devicesService: DevicesService,
   ) {}
 
   private onSuccess = () => {
@@ -45,20 +46,25 @@ export class GatewayDialogComponent {
   };
 
   public onSave() {
-    const { _id, serialNumber, name, IPv4 } = this.data;
+    const { _id, uid, vendor, status, gatewayId } = this.data;
     if (_id) {
-      this.gatewaysService
-        .updateGateway(_id, { serialNumber, name, IPv4 })
+      this.devicesService
+        .updateDevice(_id, {
+          uid,
+          vendor,
+          status,
+          gatewayId: gatewayId || null,
+        })
         .subscribe({ next: this.onSuccess, error: this.onError });
     } else {
-      this.gatewaysService
-        .createGateway({ serialNumber, name, IPv4 })
+      this.devicesService
+        .createDevice({ uid, vendor, status, gatewayId: gatewayId || null })
         .subscribe({ next: this.onSuccess, error: this.onError });
     }
   }
 
   public onDelete() {
     const { _id } = this.data;
-    this.gatewaysService.deleteGateway(_id!).subscribe(this.onSuccess);
+    this.devicesService.deleteDevice(_id!).subscribe(this.onSuccess);
   }
 }

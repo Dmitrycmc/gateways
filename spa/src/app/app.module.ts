@@ -13,16 +13,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { DeviceDialogComponent } from './device-dialog/dialog.component';
-import { GatewayDialogComponent } from './gateway-dialog/dialog.component';
+import { DeviceDialogComponent } from './dialog/device-dialog.component';
+import { GatewayDialogComponent } from './dialog/gateway-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -44,13 +44,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule,
     BrowserAnimationsModule,
     CdkDropList,
     CdkDrag,
     CdkDropListGroup,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatSlideToggleModule,
   ],
   providers: [GatewaysService, DevicesService],
   bootstrap: [AppComponent],

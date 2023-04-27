@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { DeviceWithId } from '../../types/devices';
 import { GatewayWithId } from '../../types/gateways';
 import { MatDialog } from '@angular/material/dialog';
-import { GatewayDialogComponent } from '../gateway-dialog/dialog.component';
 import { MAX_BOUND_DEVICES } from '../../constants';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { DevicesService } from '../api/devices.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { GatewayDialogComponent } from '../dialog/gateway-dialog.component';
 
 @Component({
   selector: 'app-gateway',
