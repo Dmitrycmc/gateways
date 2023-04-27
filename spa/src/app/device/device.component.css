@@ -1,12 +1,13 @@
 .wrapper {
-  width: 160px;
+  width: 150px;
   height: 100px;
 
   padding: 5px;
   margin-right: 8px;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
+  grid-gap: 0 8px;
 
   border-radius: 8px;
 
@@ -14,9 +15,11 @@
 }
 
 .off {
-  color: green;
+  background: red;
+  color: white;
 }
 
 .on {
-  color: red;
+  background: green;
+  color: white;
 }

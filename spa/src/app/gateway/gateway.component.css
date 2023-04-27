@@ -19,40 +19,32 @@
   overflow: scroll;
 }
 
-.gateway-info {
-  width: 260px;
+.info {
+  width: 235px;
   height: 100px;
 
-  padding: 5px;
   margin: 0 8px;
+  padding: 5px;
 
   background: #327ACD44;
 
+  flex-shrink: 0;
+  border-radius: 8px;
+}
+
+.gateway-info {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
+  grid-gap: 0 8px;
   align-items: center;
 
-  flex-shrink: 0;
-
-  border-radius: 8px;
   cursor: pointer;
 }
 
-.unbounded-info {
-  width: 260px;
-  height: 100px;
-
-  margin: 0 8px;
-
-  background-color: #327ACD44;
-
+.unattached-info {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  flex-shrink: 0;
-
-  border-radius: 8px;
 }
 
 .cdk-drag-placeholder {
