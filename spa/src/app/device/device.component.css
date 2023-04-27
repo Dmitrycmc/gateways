@@ -12,3 +12,11 @@
 
   cursor: pointer;
 }
+
+.off {
+  color: green;
+}
+
+.on {
+  color: red;
+}

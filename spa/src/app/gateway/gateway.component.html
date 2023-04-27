@@ -1,4 +1,12 @@
-<div class="wrapper" cdkDropList [cdkDropListData]="devices" (cdkDropListDropped)="drop($event)" cdkDropListSortingDisabled [attr.data-gatewayId]="gateway?._id">
+<div
+  class="wrapper"
+  [class.full]="devices.length >= maxBoundDevices"
+  cdkDropList
+  cdkDropListSortingDisabled
+  [cdkDropListData]="devices"
+  (cdkDropListDropped)="drop($event)"
+  [attr.data-gatewayId]="gateway?._id"
+>
   <mat-card class="gateway-info" (click)="openDialog()" *ngIf="gateway">
     <div>Name</div><div>{{gateway.name}}</div>
     <div>Serial number</div><div>{{gateway.serialNumber}}</div>

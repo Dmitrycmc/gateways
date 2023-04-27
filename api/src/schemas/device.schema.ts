@@ -31,7 +31,7 @@ export class Device {
     type: M.Types.ObjectId,
     ref: 'Gateway',
   })
-  gatewayId: string;
+  gatewayId?: string;
 }
 
 export const DeviceSchema = SchemaFactory.createForClass(Device);

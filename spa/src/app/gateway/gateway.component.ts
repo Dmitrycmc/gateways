@@ -39,12 +39,9 @@ export class GatewayComponent {
 
   drop(event: CdkDragDrop<DeviceWithId[]>) {
     const newGatewayId =
-      /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-      // @ts-ignore
-      event.container.element.nativeElement.dataset.gatewayid || null;
-    /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-    // @ts-ignore
-    const id = event.item.element.nativeElement.dataset.id!;
+      (event.container.element.nativeElement.dataset as { gatewayid?: string })
+        .gatewayid || null;
+    const id = (event.item.element.nativeElement.dataset as { id: string }).id;
     if (event.previousContainer !== event.container) {
       this.devicesService
         .updatePartiallyDevice(id, { gatewayId: newGatewayId })

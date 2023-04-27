@@ -11,5 +11,5 @@ export class CreateDeviceDto {
   readonly status: boolean;
 
   @IsOptional()
-  readonly gatewayId: string;
+  readonly gatewayId: string | null;
 }

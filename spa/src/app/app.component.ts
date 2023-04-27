@@ -12,11 +12,11 @@ import { Id } from '../types/common';
 })
 export class AppComponent implements OnInit {
   title = 'gateways-spa';
-  gateways: GatewayWithId[] = [];
-  devices: DeviceWithId[] = [];
+  gateways?: GatewayWithId[];
+  devices?: DeviceWithId[];
 
-  public getBoundDevices(gatewayId: Id | null) {
-    return this.devices.filter((device) => device.gatewayId === gatewayId);
+  public getAttachedDevices(gatewayId: Id | null) {
+    return this.devices?.filter((device) => device.gatewayId === gatewayId);
   }
 
   constructor(

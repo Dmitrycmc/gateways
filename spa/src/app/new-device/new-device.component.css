@@ -20,3 +20,7 @@
 :host-context(.wrapper:hover) .wrapper {
   opacity: 1;
 }
+
+:host-context(.wrapper.cdk-drop-list-dragging:hover) .wrapper {
+  opacity: 0;
+}

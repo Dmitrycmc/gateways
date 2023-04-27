@@ -21,6 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { FooterComponent } from './footer/footer.component';
     CdkDropList,
     CdkDrag,
     CdkDropListGroup,
+    MatProgressSpinnerModule,
   ],
   providers: [GatewaysService, DevicesService],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 <mat-card class="wrapper" (click)="openDialog()">
   <div>uid</div><div>{{device.uid}}</div>
   <div>vendor</div><div>{{device.vendor}}</div>
-  <div>status</div><div>{{device.status ? 'On' : 'Off'}}</div>
+  <div>status</div><div [class.on]="device.status" [class.off]="!device.status">{{device.status ? 'On' : 'Off'}}</div>
   <div>createdAt</div><div>{{device.createdAt}}</div>
 </mat-card>

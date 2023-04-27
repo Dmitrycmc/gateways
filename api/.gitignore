@@ -1,7 +1,5 @@
 .env
 
-# compiled output
-
 # Logs
 logs
 *.log

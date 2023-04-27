@@ -5,5 +5,5 @@ export interface IDevice extends Document {
   readonly vendor: string;
   readonly createdAt: string;
   readonly status: boolean;
-  readonly gatewayId: string;
+  readonly gatewayId: string | null;
 }
