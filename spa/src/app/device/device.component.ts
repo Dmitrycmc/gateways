@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { DeviceWithId } from '../../types/devices';
 import { DeviceDialogComponent } from '../dialog/device-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { GatewayWithId } from '../../types/gateways';
 
 @Component({
   selector: 'app-device',
@@ -12,6 +13,7 @@ export class DeviceComponent {
   constructor(private dialog: MatDialog) {}
 
   @Input('device') public device!: DeviceWithId;
+  @Input('gateways') public gateways: GatewayWithId[] = [];
 
   openDialog() {
     this.dialog.open(DeviceDialogComponent, {
@@ -21,6 +23,7 @@ export class DeviceComponent {
         vendor: this.device.vendor,
         status: this.device.status,
         gatewayId: this.device.gatewayId,
+        gateways: this.gateways,
       },
     });
   }

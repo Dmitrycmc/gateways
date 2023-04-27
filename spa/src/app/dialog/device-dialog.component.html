@@ -14,6 +14,15 @@
     </mat-form-field>
     <mat-error class="error">{{getError('vendor')}}</mat-error>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Gateway</mat-label>
+      <mat-select [(ngModel)]="data.gatewayId">
+        <mat-option *ngFor="let gateway of data.gateways" [value]="gateway._id" >
+          {{gateway.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <mat-slide-toggle [(ngModel)]="data.status">online</mat-slide-toggle>
   </div>
   <div class="buttons-container">

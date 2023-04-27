@@ -27,11 +27,13 @@ export class DevicesService {
   constructor(private http: HttpClient) {}
 
   createDevice(data: Omit<Device, 'createdAt'>) {
-    return this.http
-      .post<DeviceWithId>('api/devices', {
+    return retry(
+      this.http.post<DeviceWithId>('api/devices', {
         ...data,
         status: data.status || false,
-      })
+      }),
+    )
+      .pipe(map(prepareDevice))
       .pipe((data) => {
         data.subscribe((data) => {
           this.devices = [...(this.devices || []), data];
@@ -57,14 +59,16 @@ export class DevicesService {
         ...data,
         status: data.status || false,
       }),
-    ).pipe((data) => {
-      data.subscribe((data) => {
-        this.devices = this.devices?.map((device) =>
-          device._id === id ? { ...data, _id: id } : device,
-        );
+    )
+      .pipe(map(prepareDevice))
+      .pipe((data) => {
+        data.subscribe((data) => {
+          this.devices = this.devices?.map((device) =>
+            device._id === id ? { ...data, _id: id } : device,
+          );
+        });
+        return data;
       });
-      return data;
-    });
   }
 
   reattachDeviceDevice(id: Id, newGatewayId: Id | null) {

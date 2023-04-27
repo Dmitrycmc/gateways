@@ -20,7 +20,7 @@
 
   <mat-card class="info gateway-info mobile" *ngIf="gateway">
     <div class="pointer" (click)="openDialog()">{{gateway.name}} ({{gateway.serialNumber}}) {{gateway.IPv4}}</div>
-    <app-new-device class="mobile" *ngIf="notFull" [gatewayId]="gateway._id" />
+    <app-new-device class="mobile" *ngIf="notFull" [gatewayId]="gateway._id" [gateways]="gateways" />
   </mat-card>
 
   <mat-card class="info unattached-info" *ngIf="!gateway">
@@ -29,8 +29,8 @@
 
   <div class="devices">
     <div *ngFor="let device of devices" cdkDrag class="device" [attr.data-id]="device._id">
-      <app-device [device]="device" />
+      <app-device [device]="device" [gateways]="gateways"/>
     </div>
-    <app-new-device class="desktop" *ngIf="notFull" [gatewayId]="gateway?._id || null" />
+    <app-new-device class="desktop" *ngIf="notFull" [gatewayId]="gateway?._id || null" [gateways]="gateways"/>
   </div>
 </div>

@@ -23,8 +23,8 @@ export class GatewayComponent {
   public maxBoundDevices = MAX_BOUND_DEVICES;
 
   @Input('gateway') public gateway: GatewayWithId | null = null;
-
   @Input('devices') public devices: DeviceWithId[] = [];
+  @Input('gateways') public gateways: GatewayWithId[] = [];
 
   openDialog() {
     this.dialog.open(GatewayDialogComponent, {

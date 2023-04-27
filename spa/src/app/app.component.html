@@ -1,9 +1,9 @@
 <div class="page-container">
   <div cdkDropListGroup *ngIf="devices && gateways" class="gateways-container">
     <div *ngFor="let gateway of gateways">
-      <app-gateway [gateway]="gateway" [devices]="getAttachedDevices(gateway._id)!"/>
+      <app-gateway [gateway]="gateway" [devices]="getAttachedDevices(gateway._id)!" [gateways]="gateways"/>
     </div>
-    <app-gateway [devices]="getAttachedDevices(null)!"/>
+    <app-gateway [devices]="getAttachedDevices(null)!" [gateways]="gateways"/>
     <app-new-gateway />
   </div>
 

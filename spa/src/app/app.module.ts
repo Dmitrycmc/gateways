@@ -23,6 +23,8 @@ import { FooterComponent } from './footer/footer.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CdkListbox } from '@angular/cdk/listbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatSlideToggleModule,
+    CdkListbox,
+    MatSelectModule,
   ],
   providers: [GatewaysService, DevicesService],
   bootstrap: [AppComponent],

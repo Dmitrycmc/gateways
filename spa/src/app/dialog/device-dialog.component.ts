@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DevicesService } from '../api/devices.service';
 import { Id } from '../../types/common';
+import { GatewayWithId } from '../../types/gateways';
 
 export interface DialogData {
   _id?: Id;
@@ -9,6 +10,7 @@ export interface DialogData {
   vendor: string;
   status: boolean;
   gatewayId?: Id;
+  gateways: GatewayWithId[];
 }
 
 @Component({
