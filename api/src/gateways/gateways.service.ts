@@ -65,7 +65,11 @@ export class GatewaysService {
     if (!entity) {
       throw new NotFoundError();
     }
-    this.devicesService.unbindGateway(id);
+    await this.devicesService.unbindGateway(id);
     return entity;
+  }
+
+  async deleteAll(): Promise<void> {
+    await this.model.deleteMany();
   }
 }

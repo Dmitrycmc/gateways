@@ -20,8 +20,8 @@ export class GatewaysController {
   constructor(private readonly gatewaysService: GatewaysService) {}
 
   @Post()
-  async create(@Body() data: CreateGatewayDto): Promise<string> {
-    return JSON.stringify(await this.gatewaysService.create(data));
+  create(@Body() data: CreateGatewayDto): Promise<IGateway> {
+    return this.gatewaysService.create(data);
   }
 
   @Get()
@@ -53,5 +53,10 @@ export class GatewaysController {
   @Delete('/:id')
   delete(@Param('id') id: Id): Promise<IGateway> {
     return this.gatewaysService.delete(id);
+  }
+
+  @Delete('/')
+  deleteAll(): Promise<void> {
+    return this.gatewaysService.deleteAll();
   }
 }

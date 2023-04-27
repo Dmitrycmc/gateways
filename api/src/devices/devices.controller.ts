@@ -20,8 +20,8 @@ export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {}
 
   @Post()
-  async create(@Body() data: CreateDeviceDto): Promise<string> {
-    return JSON.stringify(await this.devicesService.create(data));
+  create(@Body() data: CreateDeviceDto): Promise<IDevice> {
+    return this.devicesService.create(data);
   }
 
   @Get()
@@ -45,6 +45,11 @@ export class DevicesController {
     @Body() data: UpdateDevicePartiallyDto,
   ): Promise<IDevice> {
     return this.devicesService.update(id, data);
+  }
+
+  @Delete('')
+  deleteAll(): Promise<void> {
+    return this.devicesService.deleteAll();
   }
 
   @Delete('/:id')

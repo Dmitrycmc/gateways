@@ -1,5 +1,6 @@
 <div class="page-container">
   <div cdkDropListGroup *ngIf="devices && gateways" class="gateways-container">
+    <h1 class="title">Gateways & devices manager</h1>
     <div *ngFor="let gateway of gateways">
       <app-gateway [gateway]="gateway" [devices]="getAttachedDevices(gateway._id)!" [gateways]="gateways"/>
     </div>

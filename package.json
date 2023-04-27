@@ -4,7 +4,7 @@
   "description": "",
   "main": "none",
   "scripts": {
-    "start": "cd api && npm i && node dist/main.js",
+    "start": "npm run install --prefix=api && npm run start --prefix=api",
     "start:dev": "concurrently \"npm run start:dev --prefix=api\" \"npm run start:dev --prefix=spa\"",
     "heroku:deploy": "mv build.gitignore .gitignore && npm run heroku:build && git add . && git commit -m build && git push heroku master -f && git reset --hard HEAD^",
     "heroku:build": "npm run build --prefix=api && npm run build --prefix=spa",

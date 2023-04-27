@@ -74,6 +74,10 @@ export class DevicesService {
     return entity;
   }
 
+  async deleteAll(): Promise<void> {
+    await this.model.deleteMany();
+  }
+
   async unbindGateway(gatewayId: Id): Promise<void> {
     await this.model.updateMany({ gatewayId }, { gatewayId: null });
   }

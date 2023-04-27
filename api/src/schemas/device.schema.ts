@@ -1,7 +1,7 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Schema as M } from 'mongoose';
+import { Prop, Schema as NestSchema, SchemaFactory } from '@nestjs/mongoose';
+import { Schema as MongooseSchema } from 'mongoose';
 
-@Schema()
+@NestSchema()
 export class Device {
   @Prop({
     required: true,
@@ -28,7 +28,7 @@ export class Device {
   status: boolean;
 
   @Prop({
-    type: M.Types.ObjectId,
+    type: MongooseSchema.Types.ObjectId,
     ref: 'Gateway',
   })
   gatewayId?: string;
