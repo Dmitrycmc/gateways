@@ -9,7 +9,6 @@ export interface DialogData {
   vendor: string;
   status: boolean;
   gatewayId?: Id;
-  update: () => void;
 }
 
 @Component({
@@ -32,7 +31,6 @@ export class DeviceDialogComponent {
 
   private onSuccess = () => {
     this.dialogRef.close();
-    this.data.update();
   };
 
   private onError = (e: any) => {

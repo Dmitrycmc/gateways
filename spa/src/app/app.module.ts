@@ -22,6 +22,7 @@ import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CdkDrag,
     CdkDropListGroup,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   providers: [GatewaysService, DevicesService],
   bootstrap: [AppComponent],

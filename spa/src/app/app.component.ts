@@ -22,15 +22,18 @@ export class AppComponent implements OnInit {
   constructor(
     private gatewaysService: GatewaysService,
     private devicesService: DevicesService,
-  ) {}
-
-  public update = () => {
-    this.gatewaysService.getGateways().subscribe((data) => {
+  ) {
+    gatewaysService.dataChange.subscribe((data) => {
       this.gateways = data;
     });
-    this.devicesService.getDevices().subscribe((data) => {
+    devicesService.dataChange.subscribe((data) => {
       this.devices = data;
     });
+  }
+
+  private update = () => {
+    this.gatewaysService.getGateways();
+    this.devicesService.getDevices();
   };
 
   ngOnInit(): void {

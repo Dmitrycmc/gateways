@@ -8,7 +8,6 @@ export interface DialogData {
   serialNumber: string;
   name: string;
   IPv4: string;
-  update: () => void;
 }
 
 @Component({
@@ -31,7 +30,6 @@ export class GatewayDialogComponent {
 
   private onSuccess = () => {
     this.dialogRef.close();
-    this.data.update();
   };
 
   private onError = (e: any) => {

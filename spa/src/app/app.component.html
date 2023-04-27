@@ -1,10 +1,10 @@
 <div class="page-container">
   <div cdkDropListGroup *ngIf="devices && gateways" class="gateways-container">
     <div *ngFor="let gateway of gateways">
-      <app-gateway [gateway]="gateway" [devices]="getAttachedDevices(gateway._id)!" [update]="update"/>
+      <app-gateway [gateway]="gateway" [devices]="getAttachedDevices(gateway._id)!"/>
     </div>
-    <app-gateway [devices]="getAttachedDevices(null)!" [update]="update"/>
-    <app-new-gateway [update]="update"/>
+    <app-gateway [devices]="getAttachedDevices(null)!"/>
+    <app-new-gateway />
   </div>
 
   <div class="spinner-container" *ngIf="!devices || !gateways">

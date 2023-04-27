@@ -12,13 +12,11 @@ export class NewDeviceComponent {
   constructor(public dialog: MatDialog) {}
 
   @Input('gatewayId') public gatewayId: Id | null = null;
-  @Input('update') public update!: () => void;
 
   openDialog() {
     this.dialog.open(DeviceDialogComponent, {
       data: {
         gatewayId: this.gatewayId,
-        update: this.update,
       },
     });
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GatewayDialogComponent } from '../gateway-dialog/dialog.component';
 
@@ -10,13 +10,9 @@ import { GatewayDialogComponent } from '../gateway-dialog/dialog.component';
 export class NewGatewayComponent {
   constructor(public dialog: MatDialog) {}
 
-  @Input('update') public update!: () => void;
-
   openDialog() {
     this.dialog.open(GatewayDialogComponent, {
-      data: {
-        update: this.update,
-      },
+      data: {},
     });
   }
 }

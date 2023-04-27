@@ -12,7 +12,6 @@ export class DeviceComponent {
   constructor(private dialog: MatDialog) {}
 
   @Input('device') public device!: DeviceWithId;
-  @Input('update') public update!: () => void;
 
   openDialog() {
     this.dialog.open(DeviceDialogComponent, {
@@ -22,7 +21,6 @@ export class DeviceComponent {
         vendor: this.device.vendor,
         status: this.device.status,
         gatewayId: this.device.gatewayId,
-        update: this.update,
       },
     });
   }
