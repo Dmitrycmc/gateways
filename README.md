@@ -1,5 +1,14 @@
 # Gateways
 
+This sample project is managing gateways - master devices that control multiple peripheral
+devices.
+The task is to create a REST service (JSON/HTTP) for storing information about these
+gateways and their associated devices. This information stored in the database.
+Also, no more that 10 peripheral devices are allowed for a gateway.
+The service also offer an operation for displaying information about all stored gateways
+(and their devices) and an operation for displaying details for a single gateway. Finally, it
+is possible to add and remove a device from a gateway.
+
 ## Usage
 API supports CRUD operations with devices:
 * GET `/api/devices`
