@@ -2,6 +2,8 @@
   height: 110px;
   width: 100%;
 
+  margin: 8px auto;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,5 +31,6 @@
   .wrapper {
     height: 30px;
     opacity: 1;
+    width: 320px;
   }
 }

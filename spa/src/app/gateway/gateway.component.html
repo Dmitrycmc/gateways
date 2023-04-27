@@ -7,13 +7,13 @@
   (cdkDropListDropped)="drop($event)"
   [attr.data-gatewayId]="gateway?._id"
 >
-  <mat-card class="info gateway-info desktop" (click)="openDialog()" *ngIf="gateway">
+  <mat-card class="info gateway-info desktop pointer" (click)="openDialog()" *ngIf="gateway">
     <div>Name</div><div>{{gateway.name}}</div>
     <div>Serial number</div><div>{{gateway.serialNumber}}</div>
     <div>IPv4</div><div>{{gateway.IPv4}}</div>
   </mat-card>
   <mat-card class="info gateway-info mobile" *ngIf="gateway">
-    <div (click)="openDialog()">{{gateway.name}} ({{gateway.serialNumber}}) {{gateway.IPv4}}</div>
+    <div class="pointer" (click)="openDialog()">{{gateway.name}} ({{gateway.serialNumber}}) {{gateway.IPv4}}</div>
     <app-new-device class="mobile" *ngIf="devices.length < maxBoundDevices || !gateway" [gatewayId]="gateway._id" />
   </mat-card>
   <mat-card class="info unattached-info" *ngIf="!gateway">

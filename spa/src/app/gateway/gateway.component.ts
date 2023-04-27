@@ -47,11 +47,14 @@ export class GatewayComponent {
         next: () => {
           this._snackBar.open('Success', '', {
             duration: 3000,
+            verticalPosition: 'top',
           });
         },
         error: () => {
           this._snackBar.open('Error', '', {
             duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
           });
         },
       });

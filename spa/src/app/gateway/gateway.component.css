@@ -1,8 +1,7 @@
 .wrapper {
   height: 110px;
-  width: 100%;
 
-  margin-bottom: 8px;
+  margin: 8px auto;
 
   display: flex;
   align-items: center;
@@ -39,7 +38,9 @@
   grid-template-columns: auto 1fr;
   grid-gap: 0 8px;
   align-items: center;
+}
 
+.pointer {
   cursor: pointer;
 }
 
@@ -60,12 +61,15 @@
 
 @media screen and (max-width: 500px) {
   .wrapper {
+    width: 320px;
     flex-direction: column;
     height: unset;
   }
 
   .devices {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0 8px;
     justify-content: space-evenly;
   }
 
