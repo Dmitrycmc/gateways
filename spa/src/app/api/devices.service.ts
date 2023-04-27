@@ -4,6 +4,9 @@ import { Device, DeviceWithId } from '../../types/devices';
 import { Id } from 'src/types/common';
 import { map } from 'rxjs';
 import { prepareDevice } from './transformers';
+import { createRetryWrapper } from './retry';
+
+const retry = createRetryWrapper(250, 3);
 
 @Injectable({
   providedIn: 'root',
@@ -19,26 +22,30 @@ export class DevicesService {
   }
 
   getDevices() {
-    return this.http
-      .get<DeviceWithId[]>('api/devices')
-      .pipe(map((devices) => devices.map(prepareDevice)));
+    return retry(this.http.get<DeviceWithId[]>('api/devices')).pipe(
+      map((devices) => devices.map(prepareDevice)),
+    );
   }
 
   updateDevice(_id: Id, data: Omit<Device, 'createdAt'>) {
-    return this.http.put<DeviceWithId>(`api/devices/${_id}`, {
-      ...data,
-      status: data.status || false,
-    });
+    return retry(
+      this.http.put<DeviceWithId>(`api/devices/${_id}`, {
+        ...data,
+        status: data.status || false,
+      }),
+    );
   }
 
   updatePartiallyDevice(_id: Id, data: Partial<Omit<Device, 'createdAt'>>) {
-    return this.http.patch<DeviceWithId>(`api/devices/${_id}`, {
-      ...data,
-      status: data.status || false,
-    });
+    return retry(
+      this.http.patch<DeviceWithId>(`api/devices/${_id}`, {
+        ...data,
+        status: data.status || false,
+      }),
+    );
   }
 
   deleteDevice(_id: Id) {
-    return this.http.delete<DeviceWithId>(`api/devices/${_id}`);
+    return retry(this.http.delete<DeviceWithId>(`api/devices/${_id}`));
   }
 }
