@@ -1,9 +1,9 @@
 <div
   class="wrapper"
-  [class.full]="devices.length >= maxBoundDevices"
   cdkDropList
   cdkDropListSortingDisabled
   [cdkDropListData]="devices"
+  [cdkDropListEnterPredicate]="dropPredicate"
   (cdkDropListDropped)="drop($event)"
   [attr.data-gatewayId]="gateway?._id"
 >
@@ -12,10 +12,12 @@
     <div>Serial number</div><div>{{gateway.serialNumber}}</div>
     <div>IPv4</div><div>{{gateway.IPv4}}</div>
   </mat-card>
+
   <mat-card class="info gateway-info mobile" *ngIf="gateway">
     <div class="pointer" (click)="openDialog()">{{gateway.name}} ({{gateway.serialNumber}}) {{gateway.IPv4}}</div>
-    <app-new-device class="mobile" *ngIf="devices.length < maxBoundDevices || !gateway" [gatewayId]="gateway._id" />
+    <app-new-device class="mobile" *ngIf="notFull" [gatewayId]="gateway._id" />
   </mat-card>
+
   <mat-card class="info unattached-info" *ngIf="!gateway">
     <div *ngIf="!gateway">Unattached devices</div>
   </mat-card>
@@ -24,6 +26,6 @@
     <div *ngFor="let device of devices" cdkDrag class="device" [attr.data-id]="device._id">
       <app-device [device]="device" />
     </div>
-    <app-new-device class="desktop" *ngIf="devices.length < maxBoundDevices || !gateway" [gatewayId]="gateway?._id || null" />
+    <app-new-device class="desktop" *ngIf="notFull" [gatewayId]="gateway?._id || null" />
   </div>
 </div>

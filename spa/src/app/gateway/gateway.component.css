@@ -55,7 +55,7 @@
   transition: opacity 0.2ms ;
 }
 
-.cdk-drop-list-dragging:not(.full) {
+.cdk-drop-list-dragging {
   background-color: #1c4881
 }
 

@@ -60,4 +60,10 @@ export class GatewayComponent {
       });
     }
   }
+
+  notFull = this.devices.length < this.maxBoundDevices || !this.gateway;
+
+  dropPredicate = () => {
+    return this.notFull;
+  };
 }
