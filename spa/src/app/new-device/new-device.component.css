@@ -28,7 +28,8 @@
 @media screen and (max-width: 500px) {
   .wrapper {
     width: 30px;
-    height: 20px;
+    height: 30px;
     opacity: 1;
+    margin: 0;
   }
 }
