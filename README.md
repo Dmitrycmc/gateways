@@ -9,6 +9,18 @@ The service also offer an operation for displaying information about all stored 
 (and their devices) and an operation for displaying details for a single gateway. Finally, it
 is possible to add and remove a device from a gateway.
 
+## Technologies
+
+### API
+* TypeScript
+* Nest.js
+* MongoDB
+* Mongoose
+
+### SPA
+* TypeScript
+* Angular.js
+
 ## Usage
 API supports CRUD operations with devices:
 * GET `/api/devices`
@@ -26,15 +38,17 @@ And with gateways:
 * PATCH `/api/gateways/:id`
 * DELETE `/api/gateways/:id`
 
+Web UI allows managing gateways and devices via forms and drag'n'drop mechanic
+
 ## DTO
 ```ts
-interface Device extends Document {
+interface Device {
     uid: number;
     vendor: string;
     status: boolean;
     gatewayId: string | null;
 }
-interface Gateway extends Document {
+interface Gateway {
     serialNumber: string;
     name: string;
     IPv4: string;
@@ -49,12 +63,12 @@ interface Gateway extends Document {
 ## Npm scripts
 * `start:dev` - used for local development
 * `start` - used for start on the server
-* `lint` - used to fix codestyle
+* `lint` - used to fix code style
 * `test` - used to run tests
 * `heroku:build` - used to build both subprojects
 * `heroku:deploy` - used to deploy to `heroku.com`
 
-## Screenshoots
+## Screenshots
 
 ### Desktop
 <img width="1726" alt="Desktop" src="https://user-images.githubusercontent.com/38041284/235147325-b45a029b-2424-4b4c-a437-31fb8ce9da8b.png">
