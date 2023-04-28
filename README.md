@@ -54,6 +54,16 @@ interface Gateway extends Document {
 * `heroku:build` - used to build both subprojects
 * `heroku:deploy` - used to deploy to `heroku.com`
 
+## Screenshoots
+
+### Desktop
+<img width="1726" alt="Desktop" src="https://user-images.githubusercontent.com/38041284/235147325-b45a029b-2424-4b4c-a437-31fb8ce9da8b.png">
+
+### Mobile
+<img width="320px" alt="Mobile" src="https://user-images.githubusercontent.com/38041284/235146702-89c2b6d5-46fd-4873-8b01-2e044eb07cba.png">
+
+## Links
+
 ### Repository
 https://github.com/Dmitrycmc/gateways
 
