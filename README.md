@@ -19,7 +19,7 @@ is possible to add and remove a device from a gateway.
 
 ### SPA
 * TypeScript
-* Angular.js
+* Angular
 
 ## Usage
 API supports CRUD operations with devices:
